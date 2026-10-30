@@ -1,0 +1,105 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Email Verification, Disposable Domain, MX/SPF/DMARC & Fraud Risk Scoring API",
+    "description": "Production-grade, zero-latency email intelligence and fraud guard API. Evaluates RFC 5322 syntax, real-time Cloudflare DoH DNS lookups (MX, SPF, DMARC, A), disposable domain detection, role accounts, and computes explainable 0-100 fraud risk scores and deliverability verdicts.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://email-fraud-guard-api.workers.dev",
+      "description": "Cloudflare Global Edge Production Server"
+    }
+  ],
+  "paths": {
+    "/v1/verify": {
+      "get": {
+        "summary": "Verify Email (GET)",
+        "operationId": "verifyEmailGet",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "description": "Email address to verify (e.g. user@example.com)",
+            "schema": {
+              "type": "string",
+              "example": "support@expensify.com"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Verification Successful"
+          }
+        }
+      },
+      "post": {
+        "summary": "Verify Email (POST)",
+        "operationId": "verifyEmailPost",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email"],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "support@expensify.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Verification Successful"
+          }
+        }
+      }
+    },
+    "/v1/verify-batch": {
+      "post": {
+        "summary": "Batch Email Verification (Up to 50 Emails)",
+        "operationId": "verifyEmailBatch",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["emails"],
+                "properties": {
+                  "emails": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "maxItems": 50
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch Verification Successful"
+          }
+        }
+      }
+    },
+    "/v1/health": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "getHealth",
+        "responses": {
+          "200": {
+            "description": "Service Operational"
+          }
+        }
+      }
+    }
+  }
+}
