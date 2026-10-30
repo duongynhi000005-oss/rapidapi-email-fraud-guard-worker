@@ -1,0 +1,10 @@
+name = "email-fraud-guard-api"
+main = "worker_email_fraud_guard.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+RAPIDAPI_PROXY_SECRET = "test-secret-change-in-production"
+
+[placement]
+mode = "smart"
