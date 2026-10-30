@@ -1,0 +1,15 @@
+{
+  "name": "email-fraud-guard-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Email Verification, Disposable Domain, MX/SPF/DMARC & Domain Fraud Risk Scoring API on Cloudflare Workers for RapidAPI Hub",
+  "main": "worker_email_fraud_guard.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.0"
+  },
+  "license": "Apache-2.0"
+}
